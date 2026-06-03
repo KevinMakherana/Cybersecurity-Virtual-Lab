@@ -166,7 +166,7 @@ IP configurations were validated across all systems to confirm proper network se
 ![IP Address Verification](./images/phase2/metasploitable-ip.png)
 
 **Results:**
-- Kali Linux: 192.168.242.128
+- Kali Linux: 192.168.242.131
 - Windows 10: 192.168.242.129
 - Metasploitable 2: 192.168.242.130
 
