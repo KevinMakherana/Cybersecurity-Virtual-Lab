@@ -176,19 +176,29 @@ All systems were confirmed to be operating within the same subnet.
 
 ## 6. Connectivity Testing
 
-Basic network connectivity tests were performed using ICMP (ping) to verify communication between systems.
+Basic network connectivity tests were performed using ICMP (ping) to verify communication within the isolated lab network.
 
-Example tests:
+Example tests were executed from the Kali Linux machine:
 
-- Kali → Windows 10
-- Kali → Metasploitable 2
+- Kali → Windows 10  
+- Kali → Metasploitable 2  
+
+---
+
+### Test Results
+
+#### Kali → Windows 10
+No response received. Windows 10 is configured to block ICMP (ping) requests by default via Windows Firewall.
+
+#### Kali → Metasploitable 2
+Successful communication confirmed with stable ICMP replies.
 
 ![Connectivity Test](./images/phase2/ping-test.png)
 
-**Result:**
-All virtual machines successfully communicated within the isolated network.
-
 ---
+
+**Conclusion:**
+The virtual lab network is functional. Metasploitable 2 is reachable, while Windows 10 ICMP traffic is restricted by firewall policy, which is expected in secure environments.
 
 ## Summary
 
