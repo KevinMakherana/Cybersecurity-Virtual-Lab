@@ -124,8 +124,9 @@ Windows 10 was configured as a target machine within the isolated network.
 
 ![Windows Host-Only](./images/phase2/windows-hostonly.png)
 
-**Configuration:**
-- IP Address: 192.168.242.131
+Configuration:
+- Network Mode: Host-Only
+- IP Address: 192.168.242.129
 - Subnet Mask: 255.255.255.0
 
 ---
@@ -136,7 +137,8 @@ Metasploitable 2 was configured as a vulnerable target system.
 
 ![Metasploitable Host-Only](./images/phase2/metasploitable-hostonly.png)
 
-**Configuration:**
+Configuration:
+- Network Mode: Host-Only
 - IP Address: 192.168.242.130
 - Subnet Mask: 255.255.255.0
 
