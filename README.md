@@ -74,3 +74,135 @@ Metasploitable 2 was deployed as a deliberately vulnerable system for penetratio
 All virtual machines were successfully installed and configured using NAT networking to provide internet access for setup and updates.
 
 This phase establishes the foundation of the cybersecurity lab before moving into network segmentation and isolated attack simulation in the next phase.
+
+# Phase 2: Network Segmentation & Lab Isolation
+
+## Overview
+
+In this phase, the virtual lab environment was reconfigured to establish a controlled and isolated internal network for cybersecurity testing.
+
+The goal was to separate internal lab traffic from external internet access and ensure that all virtual machines could communicate within a private subnet for penetration testing and security analysis.
+
+This phase represents a key step in building a realistic Security Operations Center (SOC) training environment.
+
+---
+
+## Objectives
+
+- Configure a segmented virtual network using VMware Workstation Pro
+- Implement host-only networking for internal communication
+- Validate IP addressing across all virtual machines
+- Ensure controlled connectivity between attacker and target systems
+- Prepare environment for security testing and network scanning (Phase 3)
+
+---
+
+## 1. Virtual Network Editor Configuration
+
+VMware Virtual Network Editor was used to configure and manage isolated virtual networks.
+
+The host-only network (VMnet1) was configured to create a private subnet for all virtual machines in the lab.
+
+![Virtual Network Editor Configuration](./images/phase2/virtual-network-editor.png)
+
+**Key Configuration:**
+- Network Type: Host-Only (VMnet1)
+- Subnet: 192.168.242.0/24
+- DHCP: Enabled (default VMware service)
+- Host Adapter: Connected
+
+---
+
+## 2. Windows 10 Network Configuration
+
+The Windows 10 virtual machine was configured to operate within the isolated host-only network.
+
+This allows it to function as a controlled target system within the lab environment.
+
+![Windows 10 Network Configuration](./images/phase2/windows-hostonly.png)
+
+**Configuration Summary:**
+- Network Mode: Host-Only
+- IP Address: 192.168.242.129
+- Subnet Mask: 255.255.255.0
+
+---
+
+## 3. Metasploitable 2 Network Configuration
+
+Metasploitable 2 was deployed as a vulnerable target system for penetration testing exercises.
+
+It was configured to remain within the isolated internal network.
+
+![Metasploitable Network Configuration](./images/phase2/metasploitable-hostonly.png)
+
+**Configuration Summary:**
+- Network Mode: Host-Only
+- IP Address: 192.168.242.130
+- Subnet Mask: 255.255.255.0
+
+---
+
+## 4. Kali Linux Network Configuration
+
+Kali Linux was configured as the attacker machine in the lab environment.
+
+It was connected to the same internal subnet to enable testing and reconnaissance activities.
+
+![Kali Linux Network Configuration](./images/phase2/kali-network.png)
+
+**Network Interfaces:**
+- Internal Lab Interface (Host-Only)
+- External Interface (NAT - optional for updates)
+
+---
+
+## 5. IP Address Verification
+
+IP configurations were validated across all systems to confirm proper network segmentation and communication readiness.
+
+![IP Address Verification](./images/phase2/ip-verification.png)
+
+**Results:**
+- Kali Linux: 192.168.242.128
+- Windows 10: 192.168.242.129
+- Metasploitable 2: 192.168.242.130
+
+All systems were confirmed to be operating within the same subnet.
+
+---
+
+## 6. Connectivity Testing
+
+Basic network connectivity tests were performed using ICMP (ping) to verify communication between systems.
+
+Example tests:
+
+- Kali → Windows 10
+- Kali → Metasploitable 2
+
+![Connectivity Test](./images/phase2/ping-test.png)
+
+**Result:**
+All virtual machines successfully communicated within the isolated network.
+
+---
+
+## Summary
+
+Phase 2 successfully established a controlled and isolated virtual network environment using VMware Workstation Pro.
+
+All virtual machines were configured within a shared host-only subnet, enabling internal communication while maintaining isolation from external networks.
+
+This setup forms the foundation for security testing, vulnerability scanning, and attack simulation in the next phase of the project.
+
+---
+
+## Next Phase Preview
+
+Phase 3 will focus on:
+
+- Network reconnaissance using tools such as Nmap
+- Host discovery and port scanning
+- Vulnerability identification on Metasploitable 2
+- Initial attack surface analysis using Kali Linux
