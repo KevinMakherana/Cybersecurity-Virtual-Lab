@@ -125,7 +125,7 @@ Windows 10 was configured as a target machine within the isolated network.
 ![Windows Host-Only](./images/phase2/windows-hostonly.png)
 
 **Configuration:**
-- IP Address: 192.168.242.129
+- IP Address: 192.168.242.131
 - Subnet Mask: 255.255.255.0
 
 ---
