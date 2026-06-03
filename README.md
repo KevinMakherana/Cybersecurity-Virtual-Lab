@@ -161,7 +161,9 @@ It was connected to the same internal subnet to enable testing and reconnaissanc
 
 IP configurations were validated across all systems to confirm proper network segmentation and communication readiness.
 
-![IP Address Verification](./images/phase2/ip-verification.png)
+![IP Address Verification](./images/phase2/kali-ip.png)
+![IP Address Verification](./images/phase2/windows-ip.png)
+![IP Address Verification](./images/phase2/metasploitable-ip.png)
 
 **Results:**
 - Kali Linux: 192.168.242.128
