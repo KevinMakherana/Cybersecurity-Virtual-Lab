@@ -4,27 +4,30 @@
 
 This project is a virtual cybersecurity lab built using VMware Workstation Pro. It simulates a small Security Operations Center (SOC) environment where an attacker machine (Kali Linux) interacts with vulnerable and target systems (Windows 10 and Metasploitable 2).
 
-The goal of this project is to demonstrate practical skills in:
-
-- Virtual machine deployment  
-- Network configuration  
-- Isolated lab environment setup  
-- Cybersecurity fundamentals and SOC awareness  
+The purpose of this project is to demonstrate practical skills in:
+- Virtual machine deployment and management
+- Network configuration and segmentation
+- Isolated lab environment setup
+- Basic cybersecurity and SOC fundamentals
 
 ---
 
-# Phase 1: Virtual Machine Setup (Initial Installation)
+# Phase 1: Virtual Machine Setup
+
+## Overview
 
 In this phase, all virtual machines were created and configured using VMware Workstation Pro.  
-All systems were initially configured using **NAT networking** to allow internet access for installation, updates, and initial setup.
+All systems were initially set to NAT networking to allow internet access for installation, updates, and initial setup.
+
+This phase focuses on building the foundation of the lab environment.
 
 ---
 
 ## 1. VMware Workstation Pro Dashboard
 
-The VMware environment used to create and manage all virtual machines in this lab.
+The VMware interface used to create and manage all virtual machines in the lab.
 
-![VMware Workstation Pro Dashboard](./images/phase1/vmware-home.png)
+![VMware Dashboard](./images/phase1/vmware-home.png)
 
 ---
 
@@ -38,7 +41,7 @@ Kali Linux was configured as the primary security testing machine.
 - Storage: 100 GB  
 - Network: NAT (initial setup)
 
-![Kali Linux NAT Configuration](./images/phase1/kali-nat.png)
+![Kali NAT Setup](./images/phase1/kali-nat.png)
 
 ---
 
@@ -52,7 +55,7 @@ Windows 10 was configured as a target system for testing and simulation.
 - Storage: 40 GB  
 - Network: NAT (initial setup)
 
-![Windows 10 NAT Configuration](./images/phase1/windows-nat.png)
+![Windows NAT Setup](./images/phase1/windows-nat.png)
 
 ---
 
@@ -65,64 +68,63 @@ Metasploitable 2 was deployed as a deliberately vulnerable system for penetratio
 - Storage: 8 GB  
 - Network: NAT (initial setup)
 
-![Metasploitable 2 NAT Configuration](./images/phase1/metasploitable-nat.png)
+![Metasploitable NAT Setup](./images/phase1/metasploitable-nat.png)
 
 ---
 
-# Phase 1 Summary
+## Phase 1 Summary
 
-All virtual machines were successfully installed and configured using NAT networking to provide internet access for setup and updates.
+All virtual machines were successfully deployed and configured using NAT networking to provide internet access for installation and updates.
 
-This phase establishes the foundation of the cybersecurity lab before moving into network segmentation and isolated attack simulation in the next phase.
+This phase establishes the base environment for further network segmentation and security testing.
+
+---
 
 # Phase 2: Network Segmentation & Lab Isolation
 
 ## Overview
 
-In this phase, the virtual lab environment was reconfigured to establish a controlled and isolated internal network for cybersecurity testing.
+In this phase, the virtual lab environment was reconfigured to establish a controlled and isolated internal network for security testing.
 
-The goal was to separate internal lab traffic from external internet access and ensure that all virtual machines could communicate within a private subnet for penetration testing and security analysis.
+The goal was to separate internal lab traffic from external internet access and enable controlled communication between virtual machines.
 
-This phase represents a key step in building a realistic Security Operations Center (SOC) training environment.
+This setup simulates a real-world SOC or penetration testing environment.
 
 ---
 
 ## Objectives
 
-- Configure a segmented virtual network using VMware Workstation Pro
-- Implement host-only networking for internal communication
+- Configure an isolated virtual network using VMware Workstation Pro
+- Implement Host-Only networking for internal communication
 - Validate IP addressing across all virtual machines
-- Ensure controlled connectivity between attacker and target systems
-- Prepare environment for security testing and network scanning (Phase 3)
+- Confirm connectivity between attacker and target systems
+- Prepare environment for scanning and security testing
 
 ---
 
 ## 1. Virtual Network Editor Configuration
 
-VMware Virtual Network Editor was used to configure and manage isolated virtual networks.
+VMware Virtual Network Editor was used to configure the isolated lab network.
 
-The host-only network (VMnet1) was configured to create a private subnet for all virtual machines in the lab.
+The Host-Only network (VMnet1) was configured as follows:
 
-![Virtual Network Editor Configuration](./images/phase2/virtual-network-editor.png)
+![Virtual Network Editor](./images/phase2/virtual-network-editor.png)
 
-**Key Configuration:**
+**Configuration:**
 - Network Type: Host-Only (VMnet1)
 - Subnet: 192.168.242.0/24
-- DHCP: Enabled (default VMware service)
+- DHCP: Enabled
 - Host Adapter: Connected
 
 ---
 
 ## 2. Windows 10 Network Configuration
 
-The Windows 10 virtual machine was configured to operate within the isolated host-only network.
+Windows 10 was configured as a target machine within the isolated network.
 
-This allows it to function as a controlled target system within the lab environment.
+![Windows Host-Only](./images/phase2/windows-hostonly.png)
 
-![Windows 10 Network Configuration](./images/phase2/windows-hostonly.png)
-
-**Configuration Summary:**
-- Network Mode: Host-Only
+**Configuration:**
 - IP Address: 192.168.242.129
 - Subnet Mask: 255.255.255.0
 
@@ -130,14 +132,11 @@ This allows it to function as a controlled target system within the lab environm
 
 ## 3. Metasploitable 2 Network Configuration
 
-Metasploitable 2 was deployed as a vulnerable target system for penetration testing exercises.
+Metasploitable 2 was configured as a vulnerable target system.
 
-It was configured to remain within the isolated internal network.
+![Metasploitable Host-Only](./images/phase2/metasploitable-hostonly.png)
 
-![Metasploitable Network Configuration](./images/phase2/metasploitable-hostonly.png)
-
-**Configuration Summary:**
-- Network Mode: Host-Only
+**Configuration:**
 - IP Address: 192.168.242.130
 - Subnet Mask: 255.255.255.0
 
@@ -147,66 +146,62 @@ It was configured to remain within the isolated internal network.
 
 Kali Linux was configured as the attacker machine in the lab environment.
 
-It was connected to the same internal subnet to enable testing and reconnaissance activities.
+It operates with dual network interfaces:
 
-![Kali Linux Network Configuration](./images/phase2/kali-network.png)
+![Kali Network Configuration](./images/phase2/kali-network.png)
 
 **Network Interfaces:**
-- Internal Lab Interface (Host-Only)
-- External Interface (NAT - optional for updates)
+- NAT Interface (Internet access)
+- Host-Only Interface (Internal lab network)
 
 ---
 
 ## 5. IP Address Verification
 
-IP configurations were validated across all systems to confirm proper network segmentation and communication readiness.
+IP configurations were validated across all systems to confirm proper network segmentation.
 
-![IP Address Verification](./images/phase2/kali-ip.png)
-![IP Address Verification](./images/phase2/windows-ip.png)
-![IP Address Verification](./images/phase2/metasploitable-ip.png)
+![Kali IP](./images/phase2/kali-ip.png)  
+![Windows IP](./images/phase2/windows-ip.png)  
+![Metasploitable IP](./images/phase2/metasploitable-ip.png)
 
 **Results:**
 - Kali Linux: 192.168.242.131
 - Windows 10: 192.168.242.129
 - Metasploitable 2: 192.168.242.130
 
-All systems were confirmed to be operating within the same subnet.
+All systems are operating within the same isolated subnet.
 
 ---
 
 ## 6. Connectivity Testing
 
-Basic network connectivity tests were performed using ICMP (ping) to verify communication within the isolated lab network.
+Connectivity tests were performed using ICMP (ping) from Kali Linux to validate communication within the lab network.
 
-Example tests were executed from the Kali Linux machine:
-
+### Tests Performed:
 - Kali → Windows 10  
 - Kali → Metasploitable 2  
 
 ---
 
-### Test Results
+### Results:
 
-#### Kali → Windows 10
-No response received. Windows 10 is configured to block ICMP (ping) requests by default via Windows Firewall.
+**Kali → Windows 10**  
+No response received. Windows Firewall is configured to block ICMP traffic by default.
 
-#### Kali → Metasploitable 2
+**Kali → Metasploitable 2**  
 Successful communication confirmed with stable ICMP replies.
 
 ![Connectivity Test](./images/phase2/ping-test.png)
 
 ---
 
-**Conclusion:**
-The virtual lab network is functional. Metasploitable 2 is reachable, while Windows 10 ICMP traffic is restricted by firewall policy, which is expected in secure environments.
-
-## Summary
+## Phase 2 Summary
 
 Phase 2 successfully established a controlled and isolated virtual network environment using VMware Workstation Pro.
 
-All virtual machines were configured within a shared host-only subnet, enabling internal communication while maintaining isolation from external networks.
+All virtual machines were configured within a shared Host-Only subnet, enabling internal communication while maintaining isolation from external networks.
 
-This setup forms the foundation for security testing, vulnerability scanning, and attack simulation in the next phase of the project.
+This environment forms the foundation for security testing, vulnerability scanning, and controlled attack simulation.
 
 ---
 
@@ -214,7 +209,8 @@ This setup forms the foundation for security testing, vulnerability scanning, an
 
 Phase 3 will focus on:
 
-- Network reconnaissance using tools such as Nmap
+- Network reconnaissance using Nmap
 - Host discovery and port scanning
+- Service enumeration
 - Vulnerability identification on Metasploitable 2
 - Initial attack surface analysis using Kali Linux
