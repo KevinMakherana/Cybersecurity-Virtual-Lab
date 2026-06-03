@@ -5,24 +5,26 @@
 This project is a virtual cybersecurity lab built using VMware Workstation Pro. It simulates a small Security Operations Center (SOC) environment where an attacker machine (Kali Linux) interacts with vulnerable and target systems (Windows 10 and Metasploitable 2).
 
 The goal of this project is to demonstrate practical skills in:
-- Virtual machine deployment
-- Network configuration
-- Lab environment setup
-- Cybersecurity fundamentals
+
+- Virtual machine deployment  
+- Network configuration  
+- Isolated lab environment setup  
+- Cybersecurity fundamentals and SOC awareness  
 
 ---
 
 # Phase 1: Virtual Machine Setup (Initial Installation)
 
-In this phase, all virtual machines were created and configured using VMware Workstation Pro. At this stage, all machines were initially set to NAT networking to allow internet access for installation and updates.
+In this phase, all virtual machines were created and configured using VMware Workstation Pro.  
+All systems were initially configured using **NAT networking** to allow internet access for installation, updates, and initial setup.
 
 ---
 
 ## 1. VMware Workstation Pro Dashboard
 
-This shows the initial environment where all virtual machines were created and managed.
+The VMware environment used to create and manage all virtual machines in this lab.
 
-![VMware Dashboard](images/phase1/vmware-home.png)
+![VMware Workstation Pro Dashboard](./images/phase1/vmware-home.png)
 
 ---
 
@@ -30,12 +32,13 @@ This shows the initial environment where all virtual machines were created and m
 
 Kali Linux was configured as the primary security testing machine.
 
+**Configuration:**
 - Memory: 4 GB RAM  
 - CPU: 4 Cores  
 - Storage: 100 GB  
 - Network: NAT (initial setup)
 
-![Kali NAT Setup](images/phase1/kali-nat.png)
+![Kali Linux NAT Configuration](./images/phase1/kali-nat.png)
 
 ---
 
@@ -43,12 +46,13 @@ Kali Linux was configured as the primary security testing machine.
 
 Windows 10 was configured as a target system for testing and simulation.
 
+**Configuration:**
 - Memory: 4 GB RAM  
 - CPU: 2 Cores  
 - Storage: 40 GB  
 - Network: NAT (initial setup)
 
-![Windows NAT Setup](images/phase1/windows-nat.png)
+![Windows 10 NAT Configuration](./images/phase1/windows-nat.png)
 
 ---
 
@@ -56,14 +60,17 @@ Windows 10 was configured as a target system for testing and simulation.
 
 Metasploitable 2 was deployed as a deliberately vulnerable system for penetration testing practice.
 
+**Configuration:**
 - Memory: 512 MB  
 - Storage: 8 GB  
 - Network: NAT (initial setup)
 
-![Metasploitable NAT Setup](images/phase1/metasploitable-nat.png)
+![Metasploitable 2 NAT Configuration](./images/phase1/metasploitable-nat.png)
 
 ---
 
-# Summary of Phase 1
+# Phase 1 Summary
 
-In this phase, all virtual machines were successfully installed and configured using NAT networking to ensure internet access for setup and updates. This forms the foundation for the next phase, where network segmentation and lab isolation will be implemented.
+All virtual machines were successfully installed and configured using NAT networking to provide internet access for setup and updates.
+
+This phase establishes the foundation of the cybersecurity lab before moving into network segmentation and isolated attack simulation in the next phase.
