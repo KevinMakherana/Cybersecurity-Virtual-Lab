@@ -139,8 +139,6 @@ This configuration simulates a realistic SOC and penetration testing environment
 
 VMware Virtual Network Editor was used to configure the isolated lab network.
 
-The Host-Only network (VMnet1) was configured as follows:
-
 ![Virtual Network Editor](./images/phase2/virtual-network-editor.png)
 
 **Configuration:**
@@ -154,8 +152,6 @@ The Host-Only network (VMnet1) was configured as follows:
 
 ## 2. Windows 10 Network Configuration
 
-Windows 10 was configured as a target machine within the isolated network.
-
 ![Windows Host-Only](./images/phase2/windows-hostonly.png)
 
 **Configuration:**
@@ -167,8 +163,6 @@ Windows 10 was configured as a target machine within the isolated network.
 ---
 
 ## 3. Metasploitable 2 Network Configuration
-
-Metasploitable 2 was configured as a vulnerable target system within the isolated lab network.
 
 ![Metasploitable Host-Only](./images/phase2/metasploitable-hostonly.png)
 
@@ -182,10 +176,6 @@ Metasploitable 2 was configured as a vulnerable target system within the isolate
 
 ## 4. Kali Linux Network Configuration
 
-Kali Linux was configured as the attacker machine within the lab environment.
-
-To support both internet access and internal testing, Kali Linux was configured with dual network interfaces.
-
 ![Kali Network Configuration](./images/phase2/kali-network.png)
 
 **Network Interfaces:**
@@ -193,50 +183,17 @@ To support both internet access and internal testing, Kali Linux was configured 
 * NAT Interface (Internet Access)
 * Host-Only Interface (Internal Lab Network)
 
-This dual-network configuration allows Kali Linux to access online resources while maintaining communication with systems inside the isolated lab environment.
-
 ---
 
 ## 5. IP Address Verification
 
-IP configurations were validated across all systems to confirm proper network segmentation and connectivity.
-
-![Kali IP](./images/phase2/kali-ip.png)
-
-![Windows IP](./images/phase2/windows-ip.png)
-
+![Kali IP](./images/phase2/kali-ip.png)  
+![Windows IP](./images/phase2/windows-ip.png)  
 ![Metasploitable IP](./images/phase2/metasploitable-ip.png)
-
-**Results:**
-
-* Kali Linux: 192.168.242.131
-* Windows 10: 192.168.242.129
-* Metasploitable 2: 192.168.242.130
-
-All systems were successfully assigned addresses within the same isolated subnet.
 
 ---
 
 ## 6. Connectivity Testing
-
-Connectivity tests were performed using ICMP (ping) from Kali Linux to validate communication within the lab network.
-
-### Tests Performed:
-
-* Kali Linux → Windows 10
-* Kali Linux → Metasploitable 2
-
----
-
-### Results:
-
-**Kali Linux → Windows 10**
-
-No ICMP response was received. This behaviour is expected because Windows Firewall blocks inbound ICMP requests by default.
-
-**Kali Linux → Metasploitable 2**
-
-Successful communication was confirmed through stable ICMP replies, verifying connectivity within the isolated environment.
 
 ![Connectivity Test](./images/phase2/ping-test.png)
 
@@ -246,118 +203,94 @@ Successful communication was confirmed through stable ICMP replies, verifying co
 
 Phase 2 successfully established a controlled and isolated virtual network environment using VMware Workstation Pro.
 
-All virtual machines were configured within a shared Host-Only subnet, enabling internal communication while maintaining isolation from external networks.
+---
 
-This environment forms the foundation for reconnaissance, vulnerability assessment, security testing, and controlled attack simulation activities.
+# Phase 3: Network Reconnaissance & Vulnerability Analysis
+
+## Overview
+
+In this phase, Kali Linux was used to perform network reconnaissance, port scanning, and service enumeration against the isolated lab environment.
+
+---
+
+## 1. Host Discovery (Network Scan)
+
+A host discovery scan was performed using Nmap to identify active devices within the network.
+
+![Host Discovery](./images/phase3/host-discovery.png)
+
+**Findings:**
+- 192.168.242.1 (VMware interface)
+- 192.168.242.129 (Windows 10)
+- 192.168.242.130 (Metasploitable 2)
+- 192.168.242.131 (Kali Linux)
+- 192.168.242.254 (Gateway)
+
+---
+
+## 2. TCP SYN Port Scan (Metasploitable 2)
+
+A SYN scan was performed to identify open ports.
+
+![Port Scan](./images/phase3/metasploitable-portscan.png)
+
+**Findings:**
+- FTP (21)
+- SSH (22)
+- Telnet (23)
+- HTTP (80)
+- SMB (139/445)
+- MySQL (3306)
+- VNC (5900)
+- And multiple additional services
+
+---
+
+## 3. Service Enumeration Scan
+
+A version detection scan was performed to identify running services.
+
+![Service Scan](./images/phase3/metasploitable-services.png)
+
+**Findings:**
+- vsftpd 2.3.4
+- OpenSSH 4.7p1
+- Apache 2.2.8
+- Samba 3.x
+- MySQL 5.0.x
+- PostgreSQL 8.3.x
+- Telnet enabled
+- VNC exposed
+
+---
+
+## 4. Vulnerability Analysis
+
+Metasploitable 2 contains multiple security weaknesses:
+
+- Outdated FTP (vsftpd 2.3.4)
+- Telnet transmitting plaintext credentials
+- Exposed SMB service
+- Outdated Apache server
+- Open database services
+- Remote desktop (VNC) exposed
+- Backdoor shell on port 1524
+
+---
+
+## Phase 3 Summary
+
+This phase demonstrated practical penetration testing techniques including reconnaissance, port scanning, and service enumeration.
+
+The results confirmed that the target system contains multiple vulnerabilities suitable for ethical hacking practice.
 
 ---
 
 ## Key Learning Outcomes
 
-Through this phase of the project, I gained practical experience in:
-
-* Deploying and managing virtual machines
-* Configuring NAT and Host-Only networking
-* Designing isolated cybersecurity testing environments
-* Performing network troubleshooting and validation
-* Understanding network segmentation concepts
-* Documenting cybersecurity projects using industry-style reporting
-
----
-
-Phase 3: Network Reconnaissance & Vulnerability Analysis
-Overview
-
-In this phase, Kali Linux was used to perform network reconnaissance, port scanning, and service enumeration against the isolated lab environment.
-
-The objective was to identify active hosts, analyze open ports, determine running services, and assess vulnerabilities on the Metasploitable 2 system.
-
-This phase demonstrates practical penetration testing techniques used in SOC and ethical hacking environments.
-
-Objectives
-Perform host discovery across the isolated network
-Identify active machines using Nmap scanning techniques
-Perform TCP SYN port scanning on target systems
-Enumerate services and software versions
-Analyze vulnerabilities on Metasploitable 2
-Understand attack surface exposure in a controlled environment
-1. Host Discovery (Network Scan)
-
-A host discovery scan was performed using Nmap to identify active devices within the 192.168.242.0/24 network.
-
-The scan revealed multiple active systems within the isolated environment.
-
-Findings:
-
-Active hosts included:
-
-192.168.242.1 (VMware network interface)
-192.168.242.129 (Windows 10 target system)
-192.168.242.130 (Metasploitable 2 vulnerable system)
-192.168.242.131 (Kali Linux attacker machine)
-192.168.242.254 (Virtual network gateway)
-
-2. TCP SYN Port Scan (Metasploitable 2)
-
-A TCP SYN scan was performed against Metasploitable 2 to identify open ports and exposed services.
-
-The scan revealed multiple open ports, indicating a large attack surface and weak security configuration.
-
-Findings:
-
-Open ports included services such as FTP, SSH, Telnet, HTTP, SMB, MySQL, VNC, and other legacy services.
-
-3. Service Enumeration Scan
-
-A service version detection scan was performed to identify software running on open ports.
-
-This helped determine outdated and vulnerable services present on the system.
-
-Findings:
-
-The following services were identified:
-
-vsftpd 2.3.4 (FTP)
-OpenSSH 4.7p1
-Apache HTTP Server 2.2.8
-Samba 3.X (SMB service)
-MySQL 5.0.x
-PostgreSQL 8.3.x
-VNC Remote Desktop Service
-Telnet and other legacy services
-
-4. Vulnerability Analysis
-
-Based on the results of the reconnaissance and enumeration scans, multiple security weaknesses were identified on the Metasploitable 2 system.
-
-Key Findings:
-Outdated FTP service (vsftpd 2.3.4) with known vulnerabilities
-Telnet enabled, transmitting credentials in plaintext
-Samba (SMB) service exposed and vulnerable
-MySQL database exposed to network access
-Outdated Apache web server (vulnerable version)
-VNC remote access service exposed
-Backdoor shell access available on port 1524
-5. Summary of Attack Surface
-
-The Metasploitable 2 system presents a wide attack surface due to multiple outdated and insecure services running simultaneously.
-
-This makes it an ideal system for penetration testing practice in a controlled lab environment.
-
-Phase 3 Summary
-
-This phase demonstrated core penetration testing techniques including network discovery, port scanning, service enumeration, and vulnerability analysis using Nmap.
-
-The results confirmed that Metasploitable 2 contains multiple exposed and vulnerable services suitable for ethical hacking practice and SOC training.
-
-Key Learning Outcomes
-
-Through this phase, I gained practical experience in:
-
-Network reconnaissance using Nmap
-Identifying active hosts in a subnet
-Performing TCP SYN port scanning
-Service version detection and enumeration
-Identifying vulnerable system configurations
-Understanding real-world attack surface exposure
-
+- Network reconnaissance using Nmap  
+- Host discovery in isolated networks  
+- TCP SYN scanning techniques  
+- Service version detection  
+- Vulnerability identification  
+- Attack surface analysis  
