@@ -57,7 +57,7 @@ This phase focuses on establishing the foundation of the cybersecurity lab envir
 
 The VMware Workstation Pro dashboard used to create, manage, and monitor all virtual machines within the lab environment.
 
-![VMware Dashboard](./images/phase1/vmware-home.png)
+![VMware Dashboard](./images/phase1/vmware-home1.png)
 
 ---
 
