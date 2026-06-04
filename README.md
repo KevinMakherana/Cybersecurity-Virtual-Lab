@@ -265,12 +265,99 @@ Through this phase of the project, I gained practical experience in:
 
 ---
 
-## Next Phase Preview
+Phase 3: Network Reconnaissance & Vulnerability Analysis
+Overview
 
-Phase 3 will focus on:
+In this phase, Kali Linux was used to perform network reconnaissance, port scanning, and service enumeration against the isolated lab environment.
 
-* Network reconnaissance using Nmap
-* Host discovery and port scanning
-* Service enumeration
-* Vulnerability identification on Metasploitable 2
-* Initial attack surface analysis using Kali Linux
+The objective was to identify active hosts, analyze open ports, determine running services, and assess vulnerabilities on the Metasploitable 2 system.
+
+This phase demonstrates practical penetration testing techniques used in SOC and ethical hacking environments.
+
+Objectives
+Perform host discovery across the isolated network
+Identify active machines using Nmap scanning techniques
+Perform TCP SYN port scanning on target systems
+Enumerate services and software versions
+Analyze vulnerabilities on Metasploitable 2
+Understand attack surface exposure in a controlled environment
+1. Host Discovery (Network Scan)
+
+A host discovery scan was performed using Nmap to identify active devices within the 192.168.242.0/24 network.
+
+The scan revealed multiple active systems within the isolated environment.
+
+Findings:
+
+Active hosts included:
+
+192.168.242.1 (VMware network interface)
+192.168.242.129 (Windows 10 target system)
+192.168.242.130 (Metasploitable 2 vulnerable system)
+192.168.242.131 (Kali Linux attacker machine)
+192.168.242.254 (Virtual network gateway)
+
+2. TCP SYN Port Scan (Metasploitable 2)
+
+A TCP SYN scan was performed against Metasploitable 2 to identify open ports and exposed services.
+
+The scan revealed multiple open ports, indicating a large attack surface and weak security configuration.
+
+Findings:
+
+Open ports included services such as FTP, SSH, Telnet, HTTP, SMB, MySQL, VNC, and other legacy services.
+
+3. Service Enumeration Scan
+
+A service version detection scan was performed to identify software running on open ports.
+
+This helped determine outdated and vulnerable services present on the system.
+
+Findings:
+
+The following services were identified:
+
+vsftpd 2.3.4 (FTP)
+OpenSSH 4.7p1
+Apache HTTP Server 2.2.8
+Samba 3.X (SMB service)
+MySQL 5.0.x
+PostgreSQL 8.3.x
+VNC Remote Desktop Service
+Telnet and other legacy services
+
+4. Vulnerability Analysis
+
+Based on the results of the reconnaissance and enumeration scans, multiple security weaknesses were identified on the Metasploitable 2 system.
+
+Key Findings:
+Outdated FTP service (vsftpd 2.3.4) with known vulnerabilities
+Telnet enabled, transmitting credentials in plaintext
+Samba (SMB) service exposed and vulnerable
+MySQL database exposed to network access
+Outdated Apache web server (vulnerable version)
+VNC remote access service exposed
+Backdoor shell access available on port 1524
+5. Summary of Attack Surface
+
+The Metasploitable 2 system presents a wide attack surface due to multiple outdated and insecure services running simultaneously.
+
+This makes it an ideal system for penetration testing practice in a controlled lab environment.
+
+Phase 3 Summary
+
+This phase demonstrated core penetration testing techniques including network discovery, port scanning, service enumeration, and vulnerability analysis using Nmap.
+
+The results confirmed that Metasploitable 2 contains multiple exposed and vulnerable services suitable for ethical hacking practice and SOC training.
+
+Key Learning Outcomes
+
+Through this phase, I gained practical experience in:
+
+Network reconnaissance using Nmap
+Identifying active hosts in a subnet
+Performing TCP SYN port scanning
+Service version detection and enumeration
+Identifying vulnerable system configurations
+Understanding real-world attack surface exposure
+
